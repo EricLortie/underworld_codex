@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  ScrollView
+  ScrollView,
+  Dimensions,
+  Image
 } from 'react-native';
-import { List, ListItem } from 'react-native-elements';
+import { List, ListItem, SideMenu } from 'react-native-elements';
 import { validatePhotoUrl } from '../config/functions';
-import { buildSubtitle, loadRaceData } from '../config/functions';
-import { styles } from '../styles/common';
+import { buildSubtitle, loadRaceData, SideMenuComponent } from '../config/functions';
+import { styles, primaryBGColour, primaryFontColour } from '../styles/common';
 
 class Races extends Component {
 
@@ -33,17 +35,6 @@ class Races extends Component {
     loadRaceData(this);
   }
 
-    // const remote_urls = [
-    //   ['https://tempestgrove.com/wp-json/wp/v2/pages/889', this.state.Classes, 'classes'],
-    //   ['https://tempestgrove.com/wp-json/wp/v2/pages/888', this.state.Races, 'race'],
-    //   ['https://tempestgrove.com/wp-json/wp/v2/pages/897', this.state.Skills, 'skills'],
-    //   ['https://tempestgrove.com/wp-json/wp/v2/pages/890', this.state.Skills, 'skills'],
-    //   ['https://tempestgrove.com/wp-json/wp/v2/pages/907', this.state.Skills, 'skills'],
-    //   ['https://tempestgrove.com/wp-json/wp/v2/pages/908', this.state.Skills, 'skills'],
-    //   ['https://tempestgrove.com/wp-json/wp/v2/pages/878', this.state.Spheres, 'spell_spheres'],
-    //   ['https://tempestgrove.com/wp-json/wp/v2/pages/1291', this.state.Spells, 'spells'],
-    //   ['https://tempestgrove.com/wp-json/wp/v2/pages/1312', this.state.Spells, 'spells']
-
   render() {
     // Handle case where the response is not here yet
       if ( !this.state.RaceData ) {
@@ -66,8 +57,22 @@ class Races extends Component {
         )
       }
 
+      const maxWidth = Dimensions.get('window').width;
+
       return (
         <ScrollView style={styles.defaultContainer}>
+
+          <Image
+            style={{ width: maxWidth, height: 200 }}
+            source={require('../assets/mobileAppHeader4.jpg')}
+            resizeMode="cover"
+          >
+            <Image
+              style={{ flex: 1, width: maxWidth, resizeMode: 'contain' }}
+              source={require('../assets/headerText.png')}
+              resizeMode="cover"
+            />
+          </Image>
           <List style={styles.defaultContainer}>
             {this.state.RaceData.map((race) => (
               <ListItem

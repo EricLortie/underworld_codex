@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { buildSubtitle, loadSkillsByType , validatePhotoUrl} from '../config/functions';
-import { styles } from '../styles/common';
+import { styles, primaryBGColour, primaryFontColour } from '../styles/common';
 //import Spinner, {InlineSpinner} from "../components/spinner";
 
 class RaceSkills extends Component {
@@ -71,10 +71,12 @@ class RaceSkills extends Component {
           <List style={styles.defaultContainer}>
             {this.state.RaceSkillData.map((skill) => (
               <ListItem
-                key={skill.name}
+                key={`${skill.name}-${skill.race}`}
                 title={<Text style={styles.listText}>{skill.name}</Text>}
                 subtitle={buildSubtitle(skill, 'skill')}
                 onPress={() => this.onLearnMore(skill)}
+                underlayColor={primaryBGColour}
+                chevronColor={'red'}
               />
             ))}
           </List>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, WebView, StyleSheet, View } from 'react-native';
-import { Tile, List, ListItem } from 'react-native-elements';
+import { Tile } from 'react-native-elements';
 import { validatePhotoUrl, renderSkillMetaInfo } from '../config/functions';
-import { styles } from '../styles/common';
+import { styles, primaryBGColour, primaryFontColour } from '../styles/common';
 
 class SkillDetail extends Component {
   render() {

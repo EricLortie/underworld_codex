@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, WebView, StyleSheet, View } from 'react-native';
-import { Tile, List, ListItem } from 'react-native-elements';
+import { Tile } from 'react-native-elements';
 import { validatePhotoUrl, renderRaceMetaInfo, renderSpecificSkills, ClassTypes, getSpecificSkills, buildSubtitle } from '../config/functions'
-import { styles, htmlstyles } from '../styles/common';
+import { styles, htmlstyles, primaryBGColour, primaryFontColour } from '../styles/common';
 import HTMLView from 'react-native-htmlview';
 
 class RaceDetail extends Component {
@@ -32,7 +32,6 @@ class RaceDetail extends Component {
   render() {
     const { name, optional, frag_cost, description, photo, advantages, disadvantages, life_span, racial_characteristics } = this.props.navigation.state.params;
     photo_url = validatePhotoUrl(photo);
-    var striptags = require('striptags');
 
     return (
       <ScrollView style={styles.defaultContainer}>

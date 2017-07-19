@@ -5,12 +5,15 @@ import {
   AsyncStorage,
   WebView,
   StyleSheet,
-  Platform
+  Platform,
+  NetInfo
 } from 'react-native';
-import { Grid, Col, Row, Icon } from 'react-native-elements';
-import { styles, htmlstyles } from '../styles/common';
+import { Grid, Col, Row, Icon, List, ListItem } from 'react-native-elements';
+import { styles, htmlstyles, primaryBGColour, primaryFontColour } from '../styles/common';
 import HTMLView from 'react-native-htmlview';
 import RNFetchBlob from 'react-native-fetch-blob'
+import { loadSection } from '../index'
+import { ClassStack } from './router'
 
 export const ClassTypes = {
   'Mercenary': 'Warrior',
@@ -77,7 +80,6 @@ export function buildSubtitle(ele, type) {
 
 export function renderClassMetaInfo(description, frag_cost, optional) {
 
-  var striptags = require('striptags');
   let items = [];
 
   if(frag_cost !== "" && frag_cost != null){
@@ -275,7 +277,7 @@ export function renderSphereMetaInfo(sphere) {
 
 export function validatePhotoUrl(photo) {
   if (photo == false) {
-    photo = 'app/assets/UW-DEFAULT.png';
+    photo = '/app/assets/UW-DEFAULT.png';
   }
   return photo;
 }

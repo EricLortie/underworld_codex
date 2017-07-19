@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, Text, WebView, StyleSheet, View, Card } from 'react-native';
 import { Tile, List, ListItem } from 'react-native-elements';
 import { validatePhotoUrl, renderSphereMetaInfo, buildSubtitle, loadSpellData, cleanHTML } from '../config/functions'
-import { styles, htmlstyles } from '../styles/common';
+import { styles, htmlstyles, primaryBGColour, primaryFontColour } from '../styles/common';
 import HTMLView from 'react-native-htmlview';
 
 class SphereDetail extends Component {

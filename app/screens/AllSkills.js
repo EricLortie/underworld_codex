@@ -7,7 +7,7 @@ import {
 import { List, ListItem } from 'react-native-elements';
 import { validatePhotoUrl } from '../config/functions';
 import { buildSubtitle } from '../config/functions';
-import { styles } from '../styles/common';
+import { styles, primaryBGColour, primaryFontColour } from '../styles/common';
 import { loadSkillData } from '../config/functions';
 //import Spinner, {InlineSpinner} from "../components/spinner";
 
@@ -93,6 +93,8 @@ class AllSkills extends Component {
                   title={<Text style={styles.listText}>{skill.name}</Text>}
                   subtitle={buildSubtitle(skill, 'skill')}
                   onPress={() => this.onLearnMore(skill)}
+                  underlayColor={primaryBGColour}
+                  chevronColor={'red'}
                 />
               ))}
             ))}

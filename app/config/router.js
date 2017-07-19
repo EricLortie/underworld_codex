@@ -1,7 +1,8 @@
 import React from 'react';
+import { Platform } from 'react-native'
 import { TabNavigator, StackNavigator } from 'react-navigation';
-import { Icon } from 'react-native-elements';
-
+import { Icon, List, ListItem } from 'react-native-elements';
+import { App } from '../index'
 import Skills from '../screens/Skills';
 import WarriorSkills from '../screens/WarriorSkills';
 import RogueSkills from '../screens/RogueSkills';
@@ -23,14 +24,9 @@ import { styles, primaryBGColour, primaryFontColour } from '../styles/common';
 export const ClassStack = StackNavigator({
   Classes: {
     screen: Classes,
-    navigationOptions: {
+    navigationOptions: ({ navigation }) => ({
       title: "CLASSES",
-      headerMode: 'screen',
-      titleStyle: {
-        color: primaryFontColour,
-      },
-      tintColor: primaryBGColour,
-    },
+    }),
   },
   ClassDetails: {
     screen: ClassDetail,
@@ -39,11 +35,12 @@ export const ClassStack = StackNavigator({
     }),
   }
 });
+
 export const RaceStack = StackNavigator({
   Races: {
     screen: Races,
     navigationOptions: ({ navigation }) => ({
-      title: "RACES",
+      title: "RACES"
     }),
   },
   RaceDetails: {
@@ -123,43 +120,93 @@ export const HomeStack = StackNavigator({
     screen: Home,
     navigationOptions: ({ navigation }) => ({
       title: 'Home',
+      header: null
     }),
   },
+  Classes: {
+    screen: ClassStack,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Classes',
+      header: null
+    }),
+  },
+  Races: {
+    screen: RaceStack,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Races',
+      header: null
+    }),
+  },
+  Skills: {
+    screen: SkillStack,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Skills',
+      header: null
+    }),
+  },
+  Magic: {
+    screen: SphereStack,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Spheres',
+      header: null
+    }),
+  }
 });
 
 export const Tabs = TabNavigator({
   Home: {
     screen: Home,
     navigationOptions: ({ navigation }) => ({
-    tabBarIcon: ({ tintColor }) => <Icon name="home" type="font-awesome" size={25} color={tintColor} />,
+      tabBarIcon: ({ tintColor }) => <Icon name="home" type="font-awesome" size={20} color={tintColor} />,
+      header: null
     }),
   },
   Classes: {
     screen: ClassStack,
     navigationOptions: ({ navigation }) => ({
       tabBarLabel: 'Classes',
-      tabBarIcon: ({ tintColor }) => <Icon name="universal-access" type="font-awesome" size={25} color={tintColor} />,
+      tabBarIcon: ({ tintColor }) => <Icon name="universal-access" type="font-awesome" size={20} color={tintColor} />,
+      header: null
     }),
   },
   Races: {
     screen: RaceStack,
     navigationOptions: ({ navigation }) => ({
       tabBarLabel: 'Races',
-      tabBarIcon: ({ tintColor }) => <Icon name="users" type="font-awesome" size={25} color={tintColor} />,
+      tabBarIcon: ({ tintColor }) => <Icon name="users" type="font-awesome" size={20} color={tintColor} />,
+      header: null
     }),
   },
   Skills: {
     screen: SkillStack,
     navigationOptions: ({ navigation }) => ({
       tabBarLabel: 'Skills',
-      tabBarIcon: ({ tintColor }) => <Icon name="superpowers" type="font-awesome" size={25} color={tintColor} />,
+      tabBarIcon: ({ tintColor }) => <Icon name="superpowers" type="font-awesome" size={20} color={tintColor} />,
+      header: null
     }),
   },
   Magic: {
     screen: SphereStack,
     navigationOptions: ({ navigation }) => ({
       tabBarLabel: 'Magic',
-      tabBarIcon: ({ tintColor }) => <Icon name="magic" type="font-awesome" size={25} color={tintColor} />,
+      tabBarIcon: ({ tintColor }) => <Icon name="magic" type="font-awesome" size={20} color={tintColor} />,
+      header: null
     }),
   }
+}, {
+    header: null,
+    headerMode: 'none',        // I don't want a NavBar at top
+    tabBarPosition: 'bottom',  // So your Android tabs go bottom
+    tabBarOptions: {
+      activeTintColor: 'red',  // Color of tab when pressed
+      showIcon: 'true', // Shows an icon for both iOS and Android
+      showLabel: true, //No label for Android
+      labelStyle: {
+        fontSize: 11,
+      },
+      style: {
+        backgroundColor: '#111', // Makes Android tab bar white instead of standard blue
+        height: 60 // I didn't use this in my app, so the numbers may be off.
+      }
+    },
 });

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, WebView, StyleSheet, View, Image } from 'react-native';
-import { Tile, List, ListItem } from 'react-native-elements';
+import { Tile } from 'react-native-elements';
 import { loadLocalPhoto, renderClassMetaInfo, renderSpecificSkills, ClassTypes, getSpecificSkills, buildSubtitle, renderSkillMetaInfo } from '../config/functions';
-import { styles } from '../styles/common';
+import { styles, primaryBGColour, primaryFontColour } from '../styles/common';
 import HTMLView from 'react-native-htmlview';
 
 class ClassDetail extends Component {
@@ -12,7 +12,7 @@ class ClassDetail extends Component {
 
     this.state = {
       specificSkillData: [],
-      localPhoto: '../assets/UW-DEFAULT.png'
+      localPhoto: '/app/assets/UW-DEFAULT.png'
     }
   }
 

@@ -5,7 +5,7 @@ import {
   ScrollView
 } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
-import { styles } from '../styles/common';
+import { styles, primaryBGColour, primaryFontColour } from '../styles/common';
 import { ClassTypes, loadClassData, buildSubtitle, validatePhotoUrl, loadSkillsByType } from '../config/functions';
 //import Spinner, {InlineSpinner} from "../components/spinner";
 
@@ -75,6 +75,8 @@ class ClassSkills extends Component {
                 title={<Text style={styles.listText}>{skill.name}</Text>}
                 subtitle={buildSubtitle(skill, 'skill')}
                 onPress={() => this.onLearnMore(skill)}
+                underlayColor={primaryBGColour}
+                chevronColor={'red'}
               />
             ))}
           </List>

@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  ScrollView
+  ScrollView,
+  Dimensions,
+  Image
 } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { validatePhotoUrl } from '../config/functions';
 import { buildSubtitle, loadSphereData } from '../config/functions';
-import { styles } from '../styles/common';
+import { styles, primaryBGColour, primaryFontColour } from '../styles/common';
 
 class Spheres extends Component {
 
@@ -31,18 +33,7 @@ class Spheres extends Component {
   componentWillReceiveProps() {
     loadSphereData(this);
   }
-
-    // const remote_urls = [
-    //   ['https://tempestgrove.com/wp-json/wp/v2/pages/889', this.state.Classes, 'classes'],
-    //   ['https://tempestgrove.com/wp-json/wp/v2/pages/888', this.state.Spheres, 'race'],
-    //   ['https://tempestgrove.com/wp-json/wp/v2/pages/897', this.state.Skills, 'skills'],
-    //   ['https://tempestgrove.com/wp-json/wp/v2/pages/890', this.state.Skills, 'skills'],
-    //   ['https://tempestgrove.com/wp-json/wp/v2/pages/907', this.state.Skills, 'skills'],
-    //   ['https://tempestgrove.com/wp-json/wp/v2/pages/908', this.state.Skills, 'skills'],
-    //   ['https://tempestgrove.com/wp-json/wp/v2/pages/878', this.state.Spheres, 'spell_spheres'],
-    //   ['https://tempestgrove.com/wp-json/wp/v2/pages/1291', this.state.Spells, 'spells'],
-    //   ['https://tempestgrove.com/wp-json/wp/v2/pages/1312', this.state.Spells, 'spells']
-
+  
   render() {
     // Handle case where the response is not here yet
       if ( !this.state.SphereData ) {
@@ -65,8 +56,22 @@ class Spheres extends Component {
         )
       }
 
+      const maxWidth = Dimensions.get('window').width;
+
       return (
         <ScrollView style={styles.defaultContainer}>
+
+          <Image
+            style={{ width: maxWidth, height: 200 }}
+            source={require('../assets/mobileAppHeader3.jpg')}
+            resizeMode="cover"
+          >
+            <Image
+              style={{ flex: 1, width: maxWidth, resizeMode: 'contain' }}
+              source={require('../assets/headerText.png')}
+              resizeMode="cover"
+            />
+          </Image>
           <List style={styles.defaultContainer}>
             {this.state.SphereData.map((sphere) => (
               <ListItem
@@ -74,6 +79,8 @@ class Spheres extends Component {
                 title={<Text style={styles.listText}>{sphere.name}</Text>}
                 subtitle={buildSubtitle(sphere, "sphere")}
                 onPress={() => this.onLearnMore(sphere)}
+                underlayColor={primaryBGColour}
+                chevronColor={'red'}
               />
             ))}
           </List>

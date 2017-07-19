@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  ScrollView
+  ScrollView,
+  Dimensions,
+  Image
 } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
-import { styles } from '../styles/common';
+import { styles, primaryBGColour, primaryFontColour } from '../styles/common';
 import { loadLocalPhoto, ClassTypes, loadClassData, buildSubtitle, validatePhotoUrl } from '../config/functions';
 //import Spinner, {InlineSpinner} from "../components/spinner";
 
@@ -55,8 +57,22 @@ class Classes extends Component {
         )
       }
 
+      const maxWidth = Dimensions.get('window').width;
+
       return (
         <ScrollView style={styles.defaultContainer}>
+
+          <Image
+            style={{ width: maxWidth, height: 200 }}
+            source={require('../assets/mobileAppHeader5.jpg')}
+            resizeMode="cover"
+          >
+            <Image
+              style={{ flex: 1, width: maxWidth, resizeMode: 'contain' }}
+              source={require('../assets/headerText.png')}
+              resizeMode="cover"
+            />
+          </Image>
           <List style={styles.defaultContainer}>
             {this.state.ClassData.map((pc_class) => (
               <ListItem
@@ -66,6 +82,8 @@ class Classes extends Component {
                 title={<Text style={styles.listText}>{pc_class.name}</Text>}
                 subtitle={buildSubtitle(pc_class, 'class')}
                 onPress={() => this.onLearnMore(pc_class)}
+                underlayColor={primaryBGColour}
+                chevronColor={'red'}
               />
             ))}
           </List>
@@ -75,5 +93,4 @@ class Classes extends Component {
   }
 }
 
-export const ClassScreenName = "CLASSES!";
 export default Classes;
