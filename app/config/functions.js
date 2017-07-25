@@ -125,7 +125,6 @@ export function renderSkillMetaInfo(skill, type) {
   if(skill['prerequesites'] !== "" && skill['prerequesites'] != null){
     items.push(<Text key={"prerequesites"} style={styles.skillText}>Prerequesites: {cleanHTML(skill['prerequesites'])}</Text>)
   }
-  console.log(type);
   if(type != undefined && type != 'class' && type != 'race' && type != 'specific'){
     items.push(<View key={"costLabel"} style={{flex:1}}><Text key={"GridHeader"} style={styles.skillText}>Cost</Text></View>)
     items.push(
@@ -288,17 +287,14 @@ export function validatePhotoUrl(photo) {
 }
 
 export function loadLocalPhoto(component, ele, type, stateType) {
-  console.log(`Getting: ${`@UWData:${type}:${encodeURI(ele)}:photo`}`);
   AsyncStorage.getItem(`@UWData:${type}:${encodeURI(ele)}:photo`).then((localphoto) => {
     if (localphoto !== null){
-      console.log(localphoto);
       // We have data!
       if(stateType == 'uri'){
         component.setState({ photoURI: localphoto });
       } else if (stateType == 'photo_array') {
         photos = component.state.ClassPhotos;
         photos[ele] = localphoto;
-        console.log(photos[ele]);
         component.setState({ ClassPhotos: photos });
       } else {
         return localphoto;
@@ -309,10 +305,8 @@ export function loadLocalPhoto(component, ele, type, stateType) {
 
 export function reloadAllData(){
 
-  console.log('Trying to reload data.');
   AsyncStorage.getItem('@UWData:api_version').then((local_api_version) => {
     // Load Data from API
-    console.log(local_api_version);
     fetch('https://tempestgrove.com/wp-json/wp/v2/pages/1403', { })
       .then( (response) => {
       return response.json()
@@ -327,6 +321,7 @@ export function reloadAllData(){
         loadSkillData(null);
         loadSkillsByType(null, 'racial_skills');
         loadSkillsByType(null, 'class_skills');
+        loadAllSpellData();
       }
     });
   });
@@ -466,6 +461,18 @@ export function loadClassData(component) {
 
 }
 
+export function loadAllSpellData(){
+  const spheres = ["Elemental", "Nature", "Psionics", "Healing", "Protections"]
+  const frag_spheres = ["Dark", "Light", "Draconic", "Necromancy", "Sigil", "Wytch"]
+
+  spheres.map((s) => {
+    loadSpellData(null, s, false);
+  })
+  frag_spheres.map((s) => {
+    loadSpellData(null, s, true);
+  })
+}
+
 export function loadSpellData(component, sphere, frag) {
   try {
 
@@ -474,9 +481,11 @@ export function loadSpellData(component, sphere, frag) {
     } else {
       url = 'https://tempestgrove.com/wp-json/wp/v2/pages/1291';
     }
+    console.log(sphere);
 
     AsyncStorage.getItem(`@UWData:spells:${sphere}`).then((localSpells) => {
-      if (localSpells !== undefined && localSpells != [] && component !== null){
+    console.log(JSON.parse(localSpells));
+      if (localSpells !== undefined && localSpells !== null && localSpells != [] && component !== null){
         spells = [];
         var SpellsArray = [].concat.apply([], JSON.parse(localSpells));
         SpellsArray.map((spell) => {
@@ -501,20 +510,17 @@ export function loadSpellData(component, sphere, frag) {
             let text = res.text()
             let responseJson = res.json()
 
-            spells = {};
+            spells = [];
             var SpellsArray = [].concat.apply([], responseJson.acf.spells);
             SpellsArray.map((spell) => {
               if(spell.sphere == sphere) {
-                spells[sphere].push(spell);
+                spells.push(spell);
               }
             });
-            spell.map((array_sphere, spells) => {
-
-              if(component !== null && sphere == array_sphere) {
-                component.setState({ SpellData: spells });
-              }
-              AsyncStorage.setItem(`@UWData:spells:${array_sphere}`, JSON.stringify(spells));
-            })
+            if(component !== null) {
+              component.setState({ SpellData: spells });
+            }
+            AsyncStorage.setItem(`@UWData:spells:${sphere}`, JSON.stringify(spells));
           })
           // Status code is not 200
           .catch((errorMessage, statusCode) => {
