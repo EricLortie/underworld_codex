@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-sdk
         android:minSdkVersion="16"
@@ -24,6 +25,28 @@
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        <intent-filter android:label="filter_react_native">
+          <action android:name="android.intent.action.VIEW" />
+          <category android:name="android.intent.category.DEFAULT" />
+          <category android:name="android.intent.category.BROWSABLE" />
+          <data android:scheme="http"
+              android:host="tempestgrove.com"
+              android:pathPrefix="/character-builder-beta" />
+          <data android:scheme="http"
+              android:host="tempestgrove.com"
+              android:pathPrefix="/character-generator" />
+          <data android:scheme="http"
+              android:host="messenger.com"
+              android:pathPrefix="/t/emperiex" />
+          <data android:scheme="http"
+              android:host="larp.ca" />
+          <data android:scheme="http"
+              android:host="underworldlarp.com"
+              android:pathPrefix="/forum" />
+          <data android:scheme="http"
+              android:host="underworldlarp.com"
+              android:pathPrefix="/wiki/index.php" />
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />

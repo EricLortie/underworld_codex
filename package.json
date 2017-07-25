@@ -9,9 +9,12 @@
   "dependencies": {
     "react": "16.0.0-alpha.12",
     "react-native": "0.45.1",
+    "react-native-elements": "^0.15.0",
     "react-native-fetch-blob": "^0.10.6",
     "react-native-htmlview": "^0.10.0",
     "react-native-offline": "^3.0.1",
+    "react-native-vector-icons": "^4.2.0",
+    "react-native-webintent": "^1.0.4",
     "react-navigation": "^1.0.0-beta.11"
   },
   "devDependencies": {

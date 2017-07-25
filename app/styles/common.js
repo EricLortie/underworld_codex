@@ -53,6 +53,12 @@ export const styles = StyleSheet.create({
     borderBottomColor: primaryFontColour,
     borderBottomWidth: StyleSheet.hairlineWidth
   },
+  headerContainerWPadding: {
+    padding: 20,
+    paddingTop: 40,
+    borderBottomColor: primaryFontColour,
+    borderBottomWidth: StyleSheet.hairlineWidth
+  },
   headerText: {
     fontSize: 25,
     textAlign: 'center',
