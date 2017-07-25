@@ -172,7 +172,7 @@ export const Tabs = TabNavigator({
     screen: ClassStack,
     navigationOptions: ({ navigation }) => ({
       tabBarLabel: 'Classes',
-      tabBarIcon: ({ tintColor }) => <Icon name="universal-access" type="font-awesome" size={20} color={tintColor} />,
+      tabBarIcon: ({ tintColor }) => <Icon name="universal-access" type="font-awesome" size={16} color={tintColor} />,
       header: null
     }),
   },
