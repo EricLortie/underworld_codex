@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native'
+import { Platform, Text } from 'react-native'
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Icon, List, ListItem } from 'react-native-elements';
 import { App } from '../index'
@@ -171,8 +171,8 @@ export const Tabs = TabNavigator({
   Classes: {
     screen: ClassStack,
     navigationOptions: ({ navigation }) => ({
-      tabBarLabel: 'Classes',
-      tabBarIcon: ({ tintColor }) => <Icon name="universal-access" type="font-awesome" size={16} color={tintColor} />,
+      tabBarLabel: <Text style={{fontSize: 10, marginTop:8, color: primaryFontColour}}>CLASSES</Text>,
+      tabBarIcon: ({ tintColor }) => <Icon name="universal-access" type="font-awesome" size={20} color={tintColor} />,
       header: null
     }),
   },
