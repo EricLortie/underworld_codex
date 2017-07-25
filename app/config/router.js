@@ -9,6 +9,7 @@ import RogueSkills from '../screens/RogueSkills';
 import ScholarSkills from '../screens/ScholarSkills';
 import ClassSkills from '../screens/ClassSkills';
 import RaceSkills from '../screens/RaceSkills';
+import FragSkills from '../screens/FragSkills';
 import ProductionSkills from '../screens/ProductionSkills';
 import SkillDetail from '../screens/SkillDetail';
 import Classes from '../screens/Classes';
@@ -105,6 +106,12 @@ export const SkillStack = StackNavigator({
     screen: ProductionSkills,
     navigationOptions: ({ navigation }) => ({
       title: "Production Skills",
+    }),
+  },
+  FragSkills: {
+    screen: FragSkills,
+    navigationOptions: ({ navigation }) => ({
+      title: "Frag Skills",
     }),
   },
   SkillDetails: {

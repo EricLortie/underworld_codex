@@ -52,6 +52,18 @@ class Skills extends Component {
             chevronColor={'red'}
           />
           <ListItem
+            title={<Text style={styles.listText}>View Production Skills</Text>}
+            onPress={() => this.onLearnMore('ProductionSkills')}
+            underlayColor={primaryBGColour}
+            chevronColor={'red'}
+          />
+          <ListItem
+            title={<Text style={styles.listText}>View Frag Skills</Text>}
+            onPress={() => this.onLearnMore('FragSkills')}
+            underlayColor={primaryBGColour}
+            chevronColor={'red'}
+          />
+          <ListItem
             title={<Text style={styles.listText}>View Racial Abilities</Text>}
             onPress={() => this.onLearnMore('RaceSkills')}
             underlayColor={primaryBGColour}

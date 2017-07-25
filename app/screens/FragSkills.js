@@ -6,18 +6,17 @@ import {
 } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { validatePhotoUrl } from '../config/functions';
-import { buildSubtitle } from '../config/functions';
+import { buildSubtitle, loadFragSkillData } from '../config/functions';
 import { styles, primaryBGColour, primaryFontColour } from '../styles/common';
-import { loadSkillData } from '../config/functions';
 //import Spinner, {InlineSpinner} from "../components/spinner";
 
-class ProductionSkills extends Component {
+class FragSkills extends Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      ProductionSkillData: undefined
+      FragSkillData: undefined
     }
   }
 
@@ -28,15 +27,15 @@ class ProductionSkills extends Component {
 
   // You want to load subscriptions not only when the component update but also when it gets mounted.
   componentDidMount() {
-    loadSkillData(this);
+    loadFragSkillData(this);
   }
   componentWillReceiveProps() {
-    loadSkillData(this);
+    loadFragSkillData(this);
   }
 
         // const remote_urls = [
-        //   ['https://tempestgrove.com/wp-json/wp/v2/pages/889', this.state.Productiones, 'classes'],
-        //   ['https://tempestgrove.com/wp-json/wp/v2/pages/888', this.state.Productions, 'race'],
+        //   ['https://tempestgrove.com/wp-json/wp/v2/pages/889', this.state.Classes, 'classes'],
+        //   ['https://tempestgrove.com/wp-json/wp/v2/pages/888', this.state.Races, 'race'],
         //   ['https://tempestgrove.com/wp-json/wp/v2/pages/897', this.state.Skills, 'skills'],
         //   ['https://tempestgrove.com/wp-json/wp/v2/pages/890', this.state.Skills, 'skills'],
         //   ['https://tempestgrove.com/wp-json/wp/v2/pages/907', this.state.Skills, 'skills'],
@@ -48,7 +47,7 @@ class ProductionSkills extends Component {
   render() {
 
     // Handle case where the response is not here yet
-      if ( !this.state.ProductionSkillData ) {
+      if ( !this.state.FragSkillData ) {
          // Note that you can return false it you want nothing to be put in the dom
          // This is also your chance to render a spinner or something...
          return (
@@ -60,7 +59,7 @@ class ProductionSkills extends Component {
 
       // Gives you the opportunity to handle the case where the ajax request
       // completed but the result array is empty
-      if ( this.state.ProductionSkillData.length === 0 ) {
+      if ( this.state.FragSkillData.length === 0 ) {
         return (
           <ScrollView style={styles.defaultContainerWithPadding}>
             <Text style={styles.defaultText}>No Skills Found</Text>
@@ -71,14 +70,12 @@ class ProductionSkills extends Component {
       return (
         <ScrollView style={styles.defaultContainer}>
           <List style={styles.defaultContainer}>
-            {this.state.ProductionSkillData.map((skill) => (
+            {this.state.FragSkillData.map((skill) => (
               <ListItem
                 key={skill.name}
                 title={<Text style={styles.listText}>{skill.name}</Text>}
-                subtitle={buildSubtitle(skill, 'skill')}
+                subtitle={buildSubtitle(skill, 'frag_skill')}
                 onPress={() => this.onLearnMore(skill)}
-                underlayColor={primaryBGColour}
-                chevronColor={'red'}
               />
             ))}
           </List>
@@ -88,4 +85,4 @@ class ProductionSkills extends Component {
   }
 }
 
-export default ProductionSkills;
+export default FragSkills;

@@ -34,7 +34,7 @@ class Home extends Component {
   render() {
     const warningText = "Press this button the first time you open this app, or if a new rulebook is released and your data seems out of date. This app downloads information from the internet and then saves it to your device.";
     const maxWidth = Dimensions.get('window').width;
-    const introText = "Underworld LARP is kick-ass a live-action releplaying game. Use this app to quickly access rulebook data while offline."
+    const introText = "Underworld LARP is kick-ass a live-action roleplaying game. Use this app to quickly access rulebook data while offline."
 
     return (
       <View>

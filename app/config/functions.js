@@ -59,7 +59,12 @@ export function buildSubtitle(ele, type) {
       items.push(<Text key={"frag_cost"} style={styles.subtitleText}>Frag Cost: {ele.frag_cost}</Text>);
     }
   }
-  if(type == "skill") {
+  if(type == "frag_skill") {
+    if(ele.class !== "" && ele.class != null){
+      items.push(<Text key={"class_type"} style={styles.subtitleText}>{ClassTypes[ele.class]}</Text>);
+    }
+  }
+  if(type == "skill" || type == "frag_skill") {
     if(ele.prerequesites !== "" && ele.prerequesites != null){
       items.push(<Text key={"prerequesites"} style={styles.subtitleText}>Prerequesites: {cleanHTML(ele.prerequesites)}</Text>);
     }
@@ -304,9 +309,10 @@ export function loadLocalPhoto(component, ele, type, stateType) {
 
 export function reloadAllData(){
 
-    console.log('Trying to reload data.');
+  console.log('Trying to reload data.');
   AsyncStorage.getItem('@UWData:api_version').then((local_api_version) => {
     // Load Data from API
+    console.log(local_api_version);
     fetch('https://tempestgrove.com/wp-json/wp/v2/pages/1403', { })
       .then( (response) => {
       return response.json()
@@ -323,6 +329,15 @@ export function reloadAllData(){
         loadSkillsByType(null, 'class_skills');
       }
     });
+  });
+}
+
+export function setApiDefault() {
+
+  AsyncStorage.getItem('@UWData:api_version').then((local_api_version) => {
+    if (local_api_version == null) {
+        AsyncStorage.setItem('@UWData:api_version', '0');
+    }
   });
 }
 
@@ -597,68 +612,83 @@ export function loadSkillData(component, ele) {
     skillsHash['Warrior'] = [];
     skillsHash['Rogue'] = [];
     skillsHash['Scholar'] = [];
+    skillsHash['Production'] = [];
+    skillsHash[''] = [];
 
-      skill_urls = [
-        ['https://tempestgrove.com/wp-json/wp/v2/pages/890', 'skills'],
-        ['https://tempestgrove.com/wp-json/wp/v2/pages/909', 'frag_skills']
-      ];
+    // Load Classes
+    AsyncStorage.getItem(`@UWData:skills`).then((localSkills) => {
+      if (localSkills !== null && localSkills.length != 0 && component !== null){
 
-      skill_urls.map((skill_url) => {
-        // Load Classes
-        AsyncStorage.getItem(`@UWData:${skill_url[1]}`).then((localSkills) => {
-          if (localSkills !== null && localSkills.length != 0 && component !== null){
-
-            JSON.parse(localSkills).map((skill) => {
-              if (skill['category'] != '') {
-                if(skillsHash[skill['category']] == undefined){
-                  skillsHash[skill['category']] = [];
-                }
-                skillsHash[skill['category']].push(skill)
-              }
-            });
-            component.setState({ ScholarSkillData: skillsHash['Scholar'] });
-            component.setState({ RogueSkillData: skillsHash['Rogue'] });
-            component.setState({ WarriorSkillData: skillsHash['Warrior'] });
-            component.setState({ ProductionSkillData: skillsHash['Production'] });
-
-          } else {
-          fetch(skill_url[0], { })
-            .then( (response) => {
-            return response.json()
-          })
-          .then( (responseJson) => {
-            switch(skill_url[1]){
-              case 'skills':
-                responseJson.acf.skills.map((skill) => {
-                  skillsHash[skill['category']].push(skill)
-                });
-                AsyncStorage.setItem(`@UWData:skills`, JSON.stringify(responseJson.acf.skills));
-                AsyncStorage.setItem(`@UWData:warrior_skills`, JSON.stringify(skillsHash['Warrior']));
-                AsyncStorage.setItem(`@UWData:rogue_skills`, JSON.stringify(skillsHash['Rogue']));
-                AsyncStorage.setItem(`@UWData:scholar_skills`, JSON.stringify(skillsHash['Scholar']));
-                AsyncStorage.setItem(`@UWData:production_skills`, JSON.stringify(skillsHash['Production']));
-
-                if(component !== null) {
-                  component.setState({ ScholarSkillData: skillsHash['Scholar'] });
-                  component.setState({ RogueSkillData: skillsHash['Rogue'] });
-                  component.setState({ WarriorSkillData: skillsHash['Warrior'] });
-                  component.setState({ ProductionSkillData: skillsHash['Production'] });
-                  component.setState({ SkillData: responseJson.acf.skills });
-                }
-
-                break;
-              case 'frag_skills':
-                AsyncStorage.setItem(`@UWData:${skill_url[1]}`, JSON.stringify(responseJson.acf.skills));
-                if(component !== null) {
-                  component.setState({ FragSkillData: responseJson.acf.skills });
-                }
-                break;
+        JSON.parse(localSkills).map((skill) => {
+          if (skill['category'] != '') {
+            if(skillsHash[skill['category']] == undefined || skillsHash[skill['category']] == ''){
+              skillsHash[skill['category']] = [];
             }
-          });
-        }
+            skillsHash[skill['category']].push(skill)
+          }
+        });
+        console.log(skillsHash['Production']);
+        component.setState({ ScholarSkillData: skillsHash['Scholar'] });
+        component.setState({ RogueSkillData: skillsHash['Rogue'] });
+        component.setState({ WarriorSkillData: skillsHash['Warrior'] });
+        component.setState({ ProductionSkillData: skillsHash['Production'] });
 
+      } else {
+      fetch('https://tempestgrove.com/wp-json/wp/v2/pages/890', { })
+        .then( (response) => {
+        return response.json()
+      })
+      .then( (responseJson) => {
+        responseJson.acf.skills.map((skill) => {
+          skillsHash[skill['category']].push(skill)
+        });
+        AsyncStorage.setItem(`@UWData:skills`, JSON.stringify(responseJson.acf.skills));
+        AsyncStorage.setItem(`@UWData:warrior_skills`, JSON.stringify(skillsHash['Warrior']));
+        AsyncStorage.setItem(`@UWData:rogue_skills`, JSON.stringify(skillsHash['Rogue']));
+        AsyncStorage.setItem(`@UWData:scholar_skills`, JSON.stringify(skillsHash['Scholar']));
+        AsyncStorage.setItem(`@UWData:production_skills`, JSON.stringify(skillsHash['Production']));
+
+        console.log(skillsHash['Production']);
+        if(component !== null) {
+          component.setState({ ScholarSkillData: skillsHash['Scholar'] });
+          component.setState({ RogueSkillData: skillsHash['Rogue'] });
+          component.setState({ WarriorSkillData: skillsHash['Warrior'] });
+          component.setState({ ProductionSkillData: skillsHash['Production'] });
+          component.setState({ SkillData: responseJson.acf.skills });
+        }
       });
-    });
+    }
+
+  });
+
+  } catch (error) {
+    console.log(error);
+    // Error saving data
+  }
+
+}
+export function loadFragSkillData(component, ele) {
+  try {
+    // Load Classes
+    AsyncStorage.getItem(`@UWData:frag_skills`).then((localSkills) => {
+      if (localSkills !== null && localSkills.length != 0 && component !== null){
+
+        component.setState({ FragSkillData: JSON.parse(localSkills) });
+
+      } else {
+      fetch('https://tempestgrove.com/wp-json/wp/v2/pages/909', { })
+        .then( (response) => {
+        return response.json()
+      })
+      .then( (responseJson) => {
+        AsyncStorage.setItem(`@UWData:frag_skills`, JSON.stringify(responseJson.acf.skills));
+        if(component !== null) {
+          component.setState({ FragSkillData: responseJson.acf.skills });
+        }
+      });
+    }
+
+  });
 
   } catch (error) {
     console.log(error);
