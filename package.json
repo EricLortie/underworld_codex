@@ -13,6 +13,7 @@
     "react-native-fetch-blob": "^0.10.6",
     "react-native-htmlview": "^0.10.0",
     "react-native-offline": "^3.0.1",
+    "react-native-onesignal": "^3.0.4",
     "react-native-vector-icons": "^4.2.0",
     "react-native-webintent": "^1.0.4",
     "react-navigation": "^1.0.0-beta.11"
