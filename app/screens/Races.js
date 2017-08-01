@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { List, ListItem, SideMenu } from 'react-native-elements';
 import { validatePhotoUrl } from '../config/functions';
-import { buildSubtitle, loadRaceData, SideMenuComponent } from '../config/functions';
+import { buildSubtitle, loadRaceData, SideMenuComponent, LoadingScreen } from '../config/functions';
 import { styles, primaryBGColour, primaryFontColour } from '../styles/common';
 
 class Races extends Component {
@@ -41,9 +41,7 @@ class Races extends Component {
          // Note that you can return false it you want nothing to be put in the dom
          // This is also your chance to render a spinner or something...
          return (
-           <ScrollView style={styles.defaultContainerWithPadding}>
-             <Text style={styles.defaultText}>Loading Races</Text>
-           </ScrollView>
+           <LoadingScreen />
          )
       }
 
@@ -51,9 +49,7 @@ class Races extends Component {
       // completed but the result array is empty
       if ( this.state.RaceData.length === 0 ) {
         return (
-          <ScrollView style={styles.defaultContainerWithPadding}>
-            <Text style={styles.defaultText}>No Races Found</Text>
-          </ScrollView>
+          <LoadingScreen />
         )
       }
 

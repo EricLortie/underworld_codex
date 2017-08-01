@@ -8,7 +8,7 @@ import { List, ListItem } from 'react-native-elements';
 import { validatePhotoUrl } from '../config/functions';
 import { buildSubtitle } from '../config/functions';
 import { styles, primaryBGColour, primaryFontColour } from '../styles/common';
-import { loadSkillData } from '../config/functions';
+import { loadSkillData, LoadingScreen } from '../config/functions';
 //import Spinner, {InlineSpinner} from "../components/spinner";
 
 class ProductionSkills extends Component {
@@ -52,9 +52,7 @@ class ProductionSkills extends Component {
          // Note that you can return false it you want nothing to be put in the dom
          // This is also your chance to render a spinner or something...
          return (
-           <ScrollView style={styles.defaultContainerWithPadding}>
-             <Text style={styles.defaultText}>Loading Skills</Text>
-           </ScrollView>
+           <LoadingScreen />
          )
       }
 
@@ -62,9 +60,7 @@ class ProductionSkills extends Component {
       // completed but the result array is empty
       if ( this.state.ProductionSkillData.length === 0 ) {
         return (
-          <ScrollView style={styles.defaultContainerWithPadding}>
-            <Text style={styles.defaultText}>No Skills Found</Text>
-          </ScrollView>
+          <LoadingScreen />
         )
       }
 

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { styles, primaryBGColour, primaryFontColour } from '../styles/common';
-import { loadLocalPhoto, ClassTypes, loadClassData, buildSubtitle, validatePhotoUrl } from '../config/functions';
+import { loadLocalPhoto, ClassTypes, loadClassData, buildSubtitle, validatePhotoUrl, LoadingScreen } from '../config/functions';
 //import Spinner, {InlineSpinner} from "../components/spinner";
 
 class Classes extends Component {
@@ -41,9 +41,7 @@ class Classes extends Component {
          // Note that you can return false it you want nothing to be put in the dom
          // This is also your chance to render a spinner or something...
          return (
-           <ScrollView style={styles.defaultContainerWithPadding}>
-             <Text style={styles.defaultText}>Loading Classes</Text>
-           </ScrollView>
+           <LoadingScreen />
          )
       }
 
@@ -51,9 +49,7 @@ class Classes extends Component {
       // completed but the result array is empty
       if ( this.state.ClassData.length === 0 ) {
         return (
-          <ScrollView style={styles.defaultContainerWithPadding}>
-            <Text style={styles.defaultText}>No Classes Found</Text>
-          </ScrollView>
+          <LoadingScreen />
         )
       }
 

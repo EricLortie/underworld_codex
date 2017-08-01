@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { validatePhotoUrl } from '../config/functions';
-import { buildSubtitle, loadFragSkillData } from '../config/functions';
+import { buildSubtitle, loadFragSkillData, LoadingScreen } from '../config/functions';
 import { styles, primaryBGColour, primaryFontColour } from '../styles/common';
 //import Spinner, {InlineSpinner} from "../components/spinner";
 
@@ -51,9 +51,7 @@ class FragSkills extends Component {
          // Note that you can return false it you want nothing to be put in the dom
          // This is also your chance to render a spinner or something...
          return (
-           <ScrollView style={styles.defaultContainerWithPadding}>
-             <Text style={styles.defaultText}>Loading Skills</Text>
-           </ScrollView>
+           <LoadingScreen />
          )
       }
 
@@ -61,9 +59,7 @@ class FragSkills extends Component {
       // completed but the result array is empty
       if ( this.state.FragSkillData.length === 0 ) {
         return (
-          <ScrollView style={styles.defaultContainerWithPadding}>
-            <Text style={styles.defaultText}>No Skills Found</Text>
-          </ScrollView>
+          <LoadingScreen />
         )
       }
 

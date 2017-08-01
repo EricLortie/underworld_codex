@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { validatePhotoUrl } from '../config/functions';
-import { buildSubtitle, loadSphereData } from '../config/functions';
+import { buildSubtitle, loadSphereData, LoadingScreen } from '../config/functions';
 import { styles, primaryBGColour, primaryFontColour } from '../styles/common';
 
 class Spheres extends Component {
@@ -33,16 +33,14 @@ class Spheres extends Component {
   componentWillReceiveProps() {
     loadSphereData(this);
   }
-  
+
   render() {
     // Handle case where the response is not here yet
       if ( !this.state.SphereData ) {
          // Note that you can return false it you want nothing to be put in the dom
          // This is also your chance to render a spinner or something...
          return (
-           <ScrollView style={styles.defaultContainerWithPadding}>
-             <Text style={styles.defaultText}>Loading Spheres</Text>
-           </ScrollView>
+           <LoadingScreen />
          )
       }
 
@@ -50,9 +48,7 @@ class Spheres extends Component {
       // completed but the result array is empty
       if ( this.state.SphereData.length === 0 ) {
         return (
-          <ScrollView style={styles.defaultContainerWithPadding}>
-            <Text style={styles.defaultText}>No Spheres Found</Text>
-          </ScrollView>
+          <LoadingScreen />
         )
       }
 

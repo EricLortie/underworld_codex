@@ -5,7 +5,7 @@ import {
   ScrollView
 } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
-import { buildSubtitle, loadSkillsByType , validatePhotoUrl} from '../config/functions';
+import { buildSubtitle, loadSkillsByType , validatePhotoUrl, LoadingScreen} from '../config/functions';
 import { styles, primaryBGColour, primaryFontColour } from '../styles/common';
 //import Spinner, {InlineSpinner} from "../components/spinner";
 
@@ -50,9 +50,7 @@ class RaceSkills extends Component {
          // Note that you can return false it you want nothing to be put in the dom
          // This is also your chance to render a spinner or something...
          return (
-           <ScrollView style={styles.defaultContainerWithPadding}>
-             <Text style={styles.defaultText}>Loading Racial Abilities</Text>
-           </ScrollView>
+           <LoadingScreen />
          )
       }
 
@@ -60,9 +58,7 @@ class RaceSkills extends Component {
       // completed but the result array is empty
       if ( this.state.RaceSkillData.length === 0 ) {
         return (
-          <ScrollView style={styles.defaultContainerWithPadding}>
-            <Text style={styles.defaultText}>No Racial Abilities Found</Text>
-          </ScrollView>
+          <LoadingScreen />
         )
       }
 

@@ -6,7 +6,9 @@ import {
   WebView,
   StyleSheet,
   Platform,
-  NetInfo
+  NetInfo,
+  Image,
+  Dimensions
 } from 'react-native';
 import { Grid, Col, Row, Icon, List, ListItem } from 'react-native-elements';
 import { styles, htmlstyles, primaryBGColour, primaryFontColour } from '../styles/common';
@@ -29,6 +31,36 @@ export const ClassTypes = {
 
 export function cleanHTML(html){
   return html.replace(/“|`/g, '"').replace(/<damage>/, "[damage]").replace(/<type>/, "[type]").replace(/<elemental>/, "[elemental]")
+}
+
+export class LoadingScreen extends Component {
+
+    render() {
+
+      const maxWidth = Dimensions.get('window').width;
+
+      return (
+        <View style={{
+          backgroundColor: primaryBGColour,
+          flex: 1,
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center'}}>
+          <Image
+            style={{ width: maxWidth, height: 200 }}
+            source={null}
+            resizeMode="cover">
+            <Image
+              style={{ flex: 1, width: maxWidth, resizeMode: 'contain' }}
+              source={require('../assets/headerText.png')}
+              resizeMode="cover"
+            />
+          </Image>
+          <Text style={{fontSize: 24, color: primaryFontColour}}>Loading.</Text>
+          <Text style={{fontSize: 12, color: primaryFontColour}}>This requires an internet connection.</Text>
+        </View>
+      )
+    }
 }
 
 export function buildSubtitle(ele, type) {
