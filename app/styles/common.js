@@ -117,6 +117,13 @@ export const styles = StyleSheet.create({
     borderColor: primaryFontColour,
     borderWidth: StyleSheet.hairlineWidth,
     padding: 6
+  },
+  tabBar: {
+    fontSize: 10,
+    marginTop:8,
+    paddingBottom: 8,
+    color: primaryFontColour,
+    textAlign: 'center'
   }
 });
 

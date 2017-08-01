@@ -19,6 +19,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		07EAB74F1F2B67700076D632 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07EAB74B1F2B67700076D632 /* RCTOneSignal.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3245CDED1BFEE35C00EABF68;
+			remoteInfo = RCTOneSignal;
+		};
 		07F0A24F1F266AEA006D6640 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 07F0A22A1F266AEA006D6640 /* Project object */;
@@ -36,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07EAB74A1F2AD1C60076D632 /* UW App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "UW App.entitlements"; sourceTree = "<group>"; };
+		07EAB74B1F2B67700076D632 /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTOneSignal.xcodeproj; path = "../../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; };
 		07F0A2321F266AEA006D6640 /* UW App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UW App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F0A2361F266AEA006D6640 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		07F0A2381F266AEA006D6640 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -81,6 +90,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07EAB74C1F2B67700076D632 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				07EAB7501F2B67700076D632 /* libRCTOneSignal.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		07F0A2291F266AEA006D6640 = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +121,7 @@
 		07F0A2341F266AEA006D6640 /* UW App */ = {
 			isa = PBXGroup;
 			children = (
+				07EAB74A1F2AD1C60076D632 /* UW App.entitlements */,
 				07F0A2381F266AEA006D6640 /* AppDelegate.h */,
 				07F0A2391F266AEA006D6640 /* AppDelegate.m */,
 				07F0A23B1F266AEA006D6640 /* MasterViewController.h */,
@@ -139,6 +157,7 @@
 		07F0A25C1F266AEA006D6640 /* UW AppUITests */ = {
 			isa = PBXGroup;
 			children = (
+				07EAB74B1F2B67700076D632 /* RCTOneSignal.xcodeproj */,
 				07F0A25D1F266AEA006D6640 /* UW_AppUITests.m */,
 				07F0A25F1F266AEA006D6640 /* Info.plist */,
 			);
@@ -214,6 +233,14 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = QC82DGVBQ3;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					07F0A24D1F266AEA006D6640 = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -240,6 +267,12 @@
 			mainGroup = 07F0A2291F266AEA006D6640;
 			productRefGroup = 07F0A2331F266AEA006D6640 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 07EAB74C1F2B67700076D632 /* Products */;
+					ProjectRef = 07EAB74B1F2B67700076D632 /* RCTOneSignal.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				07F0A2311F266AEA006D6640 /* UW App */,
@@ -248,6 +281,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		07EAB7501F2B67700076D632 /* libRCTOneSignal.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTOneSignal.a;
+			remoteRef = 07EAB74F1F2B67700076D632 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		07F0A2301F266AEA006D6640 /* Resources */ = {
@@ -435,6 +478,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "UW App/UW App.entitlements";
 				DEVELOPMENT_TEAM = QC82DGVBQ3;
 				INFOPLIST_FILE = "UW App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -447,6 +491,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "UW App/UW App.entitlements";
 				DEVELOPMENT_TEAM = QC82DGVBQ3;
 				INFOPLIST_FILE = "UW App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -524,6 +569,7 @@
 				07F0A2641F266AEA006D6640 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		07F0A2651F266AEA006D6640 /* Build configuration list for PBXNativeTarget "UW AppTests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +578,7 @@
 				07F0A2671F266AEA006D6640 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		07F0A2681F266AEA006D6640 /* Build configuration list for PBXNativeTarget "UW AppUITests" */ = {
 			isa = XCConfigurationList;
@@ -540,6 +587,7 @@
 				07F0A26A1F266AEA006D6640 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
