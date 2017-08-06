@@ -28,7 +28,6 @@ class AllSkills extends Component {
   }
 
   onLearnMore = (skill) => {
-    console.log(skill);
     this.props.navigation.navigate('SkillDetails', { ...skill });
   };
 
@@ -77,7 +76,6 @@ class AllSkills extends Component {
         this.state.ScholarSkillData
         this.state.ProductionSkillData
       ];
-      console.log(skillsArray);
 
       return (
         <ScrollView style={styles.defaultContainer}>

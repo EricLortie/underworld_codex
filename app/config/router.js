@@ -247,29 +247,6 @@ export const SkillStack = StackNavigator({
   }
 });
 
-export const HomeStack = StackNavigator({
-  Home: {
-    screen: Home,
-    navigationOptions: ({ navigation }) => (emptyHeader),
-  },
-  Classes: {
-    screen: ClassStack,
-    navigationOptions: ({ navigation }) => (emptyHeader),
-  },
-  Races: {
-    screen: RaceStack,
-    navigationOptions: ({ navigation }) => (emptyHeader),
-  },
-  Skills: {
-    screen: SkillStack,
-    navigationOptions: ({ navigation }) => (emptyHeader),
-  },
-  Magic: {
-    screen: SphereStack,
-    navigationOptions: ({ navigation }) => (emptyHeader),
-  }
-});
-
 export const Tabs = TabNavigator({
   Home: {
     screen: Home,

@@ -22,7 +22,6 @@ class Races extends Component {
   }
 
   onLearnMore = (race) => {
-    console.log(race);
     this.props.navigation.navigate('RaceDetails', { ...race });
   };
 

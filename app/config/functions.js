@@ -47,12 +47,12 @@ export class LoadingScreen extends Component {
           justifyContent: 'center',
           alignItems: 'center'}}>
           <Image
-            style={{ width: maxWidth, height: 200 }}
+            style={{ width: maxWidth, height: 120 }}
             source={null}
             resizeMode="cover">
             <Image
-              style={{ flex: 1, width: maxWidth, resizeMode: 'contain' }}
-              source={require('../assets/headerText.png')}
+              style={{ flex: 1, width: maxWidth-10,height: 100, resizeMode: 'contain' }}
+              source={require('../assets/uwlogotext.png')}
               resizeMode="cover"
             />
           </Image>
@@ -336,27 +336,33 @@ export function loadLocalPhoto(component, ele, type, stateType) {
 }
 
 export function reloadAllData(){
-
-  AsyncStorage.getItem('@UWData:api_version').then((local_api_version) => {
-    // Load Data from API
-    fetch('https://tempestgrove.com/wp-json/wp/v2/pages/1403', { })
-      .then( (response) => {
-      return response.json()
-    })
-    .then( (responseJson) => {
-      remote_api_version = responseJson.acf.api_data_version;
-      if(local_api_version != remote_api_version){
-        AsyncStorage.setItem('@UWData:api_version', remote_api_version);
-        loadSphereData(null);
-        loadRaceData(null);
-        loadClassData(null);
-        loadSkillData(null);
-        loadSkillsByType(null, 'racial_skills');
-        loadSkillsByType(null, 'class_skills');
-        loadAllSpellData();
-      }
+  console.log('get data');
+  try {
+    AsyncStorage.getItem('@UWData:api_version').then((local_api_version) => {
+      // Load Data from API
+      fetch('https://tempestgrove.com/wp-json/wp/v2/pages/1403', { })
+        .then( (response) => {
+        return response.json()
+      })
+      .then( (responseJson) => {
+        remote_api_version = responseJson.acf.api_data_version;
+        console.log(remote_api_version);
+        if(local_api_version != remote_api_version){
+          AsyncStorage.setItem('@UWData:api_version', remote_api_version);
+          loadSphereData(null);
+          loadRaceData(null);
+          loadClassData(null);
+          loadSkillData(null);
+          loadSkillsByType(null, 'racial_skills');
+          loadSkillsByType(null, 'class_skills');
+          loadAllSpellData();
+        }
+      });
     });
-  });
+  } catch (error) {
+    console.log(error);
+    // Error saving data
+  }
 }
 
 export function setApiDefault() {
@@ -513,10 +519,8 @@ export function loadSpellData(component, sphere, frag) {
     } else {
       url = 'https://tempestgrove.com/wp-json/wp/v2/pages/1291';
     }
-    console.log(sphere);
 
     AsyncStorage.getItem(`@UWData:spells:${sphere}`).then((localSpells) => {
-    console.log(JSON.parse(localSpells));
       if (localSpells !== undefined && localSpells !== null && localSpells != [] && component !== null){
         spells = [];
         var SpellsArray = [].concat.apply([], JSON.parse(localSpells));
@@ -665,7 +669,6 @@ export function loadSkillData(component, ele) {
             skillsHash[skill['category']].push(skill)
           }
         });
-        console.log(skillsHash['Production']);
         component.setState({ ScholarSkillData: skillsHash['Scholar'] });
         component.setState({ RogueSkillData: skillsHash['Rogue'] });
         component.setState({ WarriorSkillData: skillsHash['Warrior'] });
@@ -686,7 +689,6 @@ export function loadSkillData(component, ele) {
         AsyncStorage.setItem(`@UWData:scholar_skills`, JSON.stringify(skillsHash['Scholar']));
         AsyncStorage.setItem(`@UWData:production_skills`, JSON.stringify(skillsHash['Production']));
 
-        console.log(skillsHash['Production']);
         if(component !== null) {
           component.setState({ ScholarSkillData: skillsHash['Scholar'] });
           component.setState({ RogueSkillData: skillsHash['Rogue'] });

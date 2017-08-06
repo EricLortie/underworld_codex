@@ -22,7 +22,6 @@ class ScholarSkills extends Component {
   }
 
   onLearnMore = (skill) => {
-    console.log(skill);
     this.props.navigation.navigate('SkillDetails', { ...skill });
   };
 
